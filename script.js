@@ -3,6 +3,9 @@ $(document).ready(function() {
 
   // X's go first
   var playerXorO = "X";
+  var xMoves = [];
+  var oMoves = [];
+
   var switchPlayer = function() {
     // Switch to other letter after play goes through
     if (playerXorO === "X") {
@@ -18,8 +21,15 @@ $(document).ready(function() {
 
     // Check to see if box already has "selected" class
     if (!$(this).hasClass("selected")) {
-      $(this).toggleClass("selected");
+      $(this).addClass("selected");
       $(this).text(playerXorO);
+      if (playerXorO === "X") {
+        xMoves.push($(this).attr("id"));
+        check4Win(playerXorO, xMoves);
+      } else {
+        oMoves.push($(this).attr("id"));
+        check4Win(playerXorO, oMoves);
+      }
       switchPlayer();
     }
   });
@@ -28,8 +38,88 @@ $(document).ready(function() {
   $("#reset").on("click", function() {
     $("td").removeClass("selected");
     $("td").text("");
+    playerXorO = "X";
+    xMoves = [];
+    oMoves = [];
+    $("h2").text("X's go first!")
   })
 
+  // Check for Winner
+  var allBoxes = ["row1box1", "row1box2", "row1box3", "row2box1", "row2box2", "row2box3", "row3box1", "row3box2", "row3box3"]
+
+  var check4Win = function(whichLetter, squaresClaimed) {
+    var winTopRow = 0, winMiddleRow = 0, winBottomRow = 0;
+    var winFirstCol = 0, winSecondCol = 0, winThirdCol = 0;
+    var diagonal1 = 0, diagonal2 = 0;
+
+    for (var i = 0; i < allBoxes.length; i++) {
+      var isInArray = $.inArray(allBoxes[i], squaresClaimed);
+
+      // Row Counters
+      if (i <= 2 && (isInArray != -1)) {
+        winTopRow++;
+      } else if (i <= 5 && (isInArray != -1)) {
+        winMiddleRow++;
+      } else if (i <= 8 && (isInArray != -1)) {
+        winBottomRow++;
+      }
+
+      // Column 1
+      if (i === 0 && (isInArray != -1)) {
+        winFirstCol++;
+      } else if (i === 3 && (isInArray != -1)) {
+        winFirstCol++;
+      } else if (i === 6 && (isInArray != -1)) {
+        winFirstCol++;
+      }
 
 
+    // Column 2
+    if (i === 1 && (isInArray != -1)) {
+      winSecondCol++;
+    } else if (i === 4 && (isInArray != -1)) {
+      winSecondCol++;
+    } else if (i === 7 && (isInArray != -1)) {
+      winSecondCol++;
+    }
+
+    // Column 3
+    if (i === 2 && (isInArray != -1)) {
+      winThirdCol++;
+    } else if (i === 5 && (isInArray != -1)) {
+      winThirdCol++;
+    } else if (i === 8 && (isInArray != -1)) {
+      winThirdCol++;
+    }
+
+    // Diagonal 1 Check (Top Left to Bottom Right)
+    if (i === 0 && (isInArray != -1)) {
+      diagonal1++;
+    } else if (i === 4 && (isInArray != -1)) {
+      diagonal1++;
+    } else if (i === 8 && (isInArray != -1)) {
+      diagonal1++;
+    }
+
+    // Diagonal 2 Check (Top Right to Bottom Left)
+    if (i === 2 && (isInArray != -1)) {
+      diagonal2++;
+    } else if (i === 4 && (isInArray != -1)) {
+      diagonal2++;
+    } else if (i === 6 && (isInArray != -1)) {
+      diagonal2++;
+    }
+  } // Closes For Loop
+
+    // Check for Winning Row
+    if (winTopRow === 3 || winMiddleRow === 3) {
+      alert(whichLetter + " wins!");
+    } else if (winBottomRow === 3 || winFirstCol === 3) {
+      alert(whichLetter + " wins!");
+    } else if (winSecondCol === 3 || winThirdCol === 3) {
+      alert(whichLetter + " wins!");
+    } else if (diagonal1 === 3 || diagonal2 === 3) {
+      alert(whichLetter + " wins!");
+    }
+  }// Closes check4Win function
 });
