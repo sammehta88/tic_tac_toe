@@ -17,12 +17,10 @@ h1 {
   font-size: 4rem;
   padding: 20px;
   margin: 0;
-  -webkit-transition: -webkit-transform 2s;
   transition: transform 2s;
 }
 
 h1:hover {
-  -webkit-transform: rotate(360deg);
   transform: rotate(360deg);
 }
 
@@ -65,17 +63,8 @@ td {
 
 #reset:hover {
   background-color: #01cb9c;
-  -webkit-animation: lighten 2s 1;
-  animation: lighten 2s 1;
-}
-
-@-webkit-keyframes lighten {
-  from {
-    background-color: #019875;
-  }
-  to {
-    background-color: #01cb9c;
-  }
+  -webkit-animation: lighten 1s 1;
+  animation: lighten 1s 1;
 }
 
 @keyframes lighten {
@@ -84,15 +73,6 @@ td {
   }
   to {
     background-color: #01cb9c;
-  }
-}
-
-@-webkit-keyframes unlighten {
-  from {
-    background-color: #01cb9c;
-  }
-  to {
-    background-color: #019875;
   }
 }
 
