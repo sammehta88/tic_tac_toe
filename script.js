@@ -16,7 +16,7 @@ $(document).ready(function() {
     $("h2").fadeOut("fast", function(){
       $("h2").text(playerXorO + "'s turn!");
     });
-    $("h2").fadeIn("fast", function(){});
+    $("h2").fadeIn("fast");
   }
 
   // React to Player Clicking on Box
