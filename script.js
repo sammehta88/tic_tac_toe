@@ -48,12 +48,12 @@ $(document).ready(function() {
   })
 
   // Check for Winner
-  var allBoxes = ["row1box1", "row1box2", "row1box3", "row2box1", "row2box2", "row2box3", "row3box1", "row3box2", "row3box3"]
-
   var check4Win = function(whichLetter, squaresClaimed) {
     var winTopRow = 0, winMiddleRow = 0, winBottomRow = 0;
     var winFirstCol = 0, winSecondCol = 0, winThirdCol = 0;
     var diagonal1 = 0, diagonal2 = 0;
+
+    var allBoxes = ["row1box1", "row1box2", "row1box3", "row2box1", "row2box2", "row2box3", "row3box1", "row3box2", "row3box3"]
 
     for (var i = 0; i < allBoxes.length; i++) {
       var isInArray = $.inArray(allBoxes[i], squaresClaimed);

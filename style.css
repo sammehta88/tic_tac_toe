@@ -17,8 +17,8 @@ h1 {
   font-size: 4rem;
   padding: 20px;
   margin: 0;
-  -webkit-transition: width 2s, height 2s, background-color 2s, -webkit-transform 2s;
-  transition: width 2s, height 2s, background-color 2s, transform 2s;
+  -webkit-transition: -webkit-transform 2s;
+  transition: transform 2s;
 }
 
 h1:hover {
@@ -59,67 +59,49 @@ td {
   margin: 35px auto;
   padding: 15px;
   border-radius: 5px;
-  -webkit-animation: unbulge 2s 1;
-  animation: unbulge 2s 1;
+  -webkit-animation: unlighten 2s 1;
+  animation: unlighten 2s 1;
 }
 
 #reset:hover {
-  background-color: white;
-  color: #019875;
-  padding: 30px;
-  -webkit-animation: bulge 2s 1;
-  animation: bulge 2s 1;
+  background-color: #01cb9c;
+  -webkit-animation: lighten 2s 1;
+  animation: lighten 2s 1;
 }
 
-@-webkit-keyframes bulge {
+@-webkit-keyframes lighten {
   from {
     background-color: #019875;
-    color: white;
-    padding: 15px;
   }
   to {
-    background-color: white;
-    color: #019875;
-    padding: 30px;
+    background-color: #01cb9c;
   }
 }
 
-@keyframes bulge {
+@keyframes lighten {
   from {
     background-color: #019875;
-    color: white;
-    padding: 15px;
   }
   to {
-    background-color: white;
-    color: #019875;
-    padding: 30px;
+    background-color: #01cb9c;
   }
 }
 
-@-webkit-keyframes unbulge {
+@-webkit-keyframes unlighten {
   from {
-    background-color: white;
-    color: #019875;
-    padding: 30px;
+    background-color: #01cb9c;
   }
   to {
     background-color: #019875;
-    color: white;
-    padding: 15px;
   }
 }
 
-@keyframes unbulge {
+@keyframes unlighten {
   from {
-    background-color: white;
-    color: #019875;
-    padding: 30px;
+    background-color: #01cb9c;
   }
   to {
     background-color: #019875;
-    color: white;
-    padding: 15px;
   }
 }
 
