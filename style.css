@@ -1,36 +1,134 @@
+@import url(https://fonts.googleapis.com/css?family=Boogaloo);
+
+/* Main */
 * {
   box-sizing: border-box;
 }
 
 body {
+  font-family: "Boogaloo", cursive;
   text-align: center;
+  color: #019875;
+  background-image: url("img/tweed.png");
 }
 
-.gameboard {
-  width: 75%;
-  margin: 0 auto;
+/* Header */
+h1 {
+  font-size: 4rem;
+  padding: 20px;
+  margin: 0;
+  -webkit-transition: width 2s, height 2s, background-color 2s, -webkit-transform 2s;
+  transition: width 2s, height 2s, background-color 2s, transform 2s;
 }
 
-table {
+h1:hover {
+  -webkit-transform: rotate(360deg);
+  transform: rotate(360deg);
+}
+
+h2 {
+  color: #fff;
+  font-size: 2rem;
+  margin: 15px;
+}
+
+/* Game Board */
+.gameboard, table {
   margin: 0 auto;
 }
 
 td {
-  border: 2px solid black;
-  width: 75px;
-  height: 75px;
+  border: 2px solid #666;
+  width: 100px;
+  height: 100px;
+  background-color: #eee;
+  font-size: 3rem;
 }
 
 .selected {
-  background-color: #ddd;
+  background-color: #ccc;
+  color: #019875;
 }
 
+/* Reset Button */
 #reset {
   display: inline-block;
-  margin: 0 auto;
-  background-color: black;
-  color: white;
-  padding: 3%;
+  font-size: 2rem;
+  background-color: #019875;
+  color: #fff;
+  margin: 35px auto;
+  padding: 15px;
   border-radius: 5px;
-  margin-top: 3%;
+  -webkit-animation: unbulge 2s 1;
+  animation: unbulge 2s 1;
+}
+
+#reset:hover {
+  background-color: white;
+  color: #019875;
+  padding: 30px;
+  -webkit-animation: bulge 2s 1;
+  animation: bulge 2s 1;
+}
+
+@-webkit-keyframes bulge {
+  from {
+    background-color: #019875;
+    color: white;
+    padding: 15px;
+  }
+  to {
+    background-color: white;
+    color: #019875;
+    padding: 30px;
+  }
+}
+
+@keyframes bulge {
+  from {
+    background-color: #019875;
+    color: white;
+    padding: 15px;
+  }
+  to {
+    background-color: white;
+    color: #019875;
+    padding: 30px;
+  }
+}
+
+@-webkit-keyframes unbulge {
+  from {
+    background-color: white;
+    color: #019875;
+    padding: 30px;
+  }
+  to {
+    background-color: #019875;
+    color: white;
+    padding: 15px;
+  }
+}
+
+@keyframes unbulge {
+  from {
+    background-color: white;
+    color: #019875;
+    padding: 30px;
+  }
+  to {
+    background-color: #019875;
+    color: white;
+    padding: 15px;
+  }
+}
+
+/* Win Message */
+.winMessage {
+  width: 100%;
+  padding: 30px;
+  background-color: black;
+  opacity: 0.4;
+  color: #fff;
+  font-size: 1.5rem;
 }

@@ -13,14 +13,17 @@ $(document).ready(function() {
     } else {
       playerXorO = "X";
     }
-    $("h2").text(playerXorO + "'s turn!")
+    $("h2").fadeOut("fast", function(){
+      $("h2").text(playerXorO + "'s turn!");
+    });
+    $("h2").fadeIn("fast", function(){});
   }
 
   // React to Player Clicking on Box
   $("td").on("click", function() {
 
-    // Check to see if box already has "selected" class
-    if (!$(this).hasClass("selected")) {
+    // Check to see if winMessage already exists or box already has "selected" class
+    if ($(".winMessage").length === 0 && !$(this).hasClass("selected")) {
       $(this).addClass("selected");
       $(this).text(playerXorO);
       if (playerXorO === "X") {
@@ -30,7 +33,6 @@ $(document).ready(function() {
         oMoves.push($(this).attr("id"));
         check4Win(playerXorO, oMoves);
       }
-      switchPlayer();
     }
   });
 
@@ -41,7 +43,8 @@ $(document).ready(function() {
     playerXorO = "X";
     xMoves = [];
     oMoves = [];
-    $("h2").text("X's go first!")
+    $("h2").text("X's go first...").fadeIn("fast", function(){});
+    $(".winMessage").slideUp().remove();
   })
 
   // Check for Winner
@@ -73,53 +76,60 @@ $(document).ready(function() {
         winFirstCol++;
       }
 
+      // Column 2
+      if (i === 1 && (isInArray != -1)) {
+        winSecondCol++;
+      } else if (i === 4 && (isInArray != -1)) {
+        winSecondCol++;
+      } else if (i === 7 && (isInArray != -1)) {
+        winSecondCol++;
+      }
 
-    // Column 2
-    if (i === 1 && (isInArray != -1)) {
-      winSecondCol++;
-    } else if (i === 4 && (isInArray != -1)) {
-      winSecondCol++;
-    } else if (i === 7 && (isInArray != -1)) {
-      winSecondCol++;
+      // Column 3
+      if (i === 2 && (isInArray != -1)) {
+        winThirdCol++;
+      } else if (i === 5 && (isInArray != -1)) {
+        winThirdCol++;
+      } else if (i === 8 && (isInArray != -1)) {
+        winThirdCol++;
+      }
+
+      // Diagonal 1 Check (Top Left to Bottom Right)
+      if (i === 0 && (isInArray != -1)) {
+        diagonal1++;
+      } else if (i === 4 && (isInArray != -1)) {
+        diagonal1++;
+      } else if (i === 8 && (isInArray != -1)) {
+        diagonal1++;
+      }
+
+      // Diagonal 2 Check (Top Right to Bottom Left)
+      if (i === 2 && (isInArray != -1)) {
+        diagonal2++;
+      } else if (i === 4 && (isInArray != -1)) {
+        diagonal2++;
+      } else if (i === 6 && (isInArray != -1)) {
+        diagonal2++;
+      }
+    } // Closes For Loop
+
+    // Winning Modal
+    var winMessage = function(whichLetter) {
+      $("body").prepend("<div class='winMessage'>" + whichLetter + " wins the game!</div>");
+      $(".winMessage").hide().slideDown("slow", function(){});
+      $("h2").fadeOut("fast", function(){});
     }
-
-    // Column 3
-    if (i === 2 && (isInArray != -1)) {
-      winThirdCol++;
-    } else if (i === 5 && (isInArray != -1)) {
-      winThirdCol++;
-    } else if (i === 8 && (isInArray != -1)) {
-      winThirdCol++;
-    }
-
-    // Diagonal 1 Check (Top Left to Bottom Right)
-    if (i === 0 && (isInArray != -1)) {
-      diagonal1++;
-    } else if (i === 4 && (isInArray != -1)) {
-      diagonal1++;
-    } else if (i === 8 && (isInArray != -1)) {
-      diagonal1++;
-    }
-
-    // Diagonal 2 Check (Top Right to Bottom Left)
-    if (i === 2 && (isInArray != -1)) {
-      diagonal2++;
-    } else if (i === 4 && (isInArray != -1)) {
-      diagonal2++;
-    } else if (i === 6 && (isInArray != -1)) {
-      diagonal2++;
-    }
-  } // Closes For Loop
-
     // Check for Winning Row
     if (winTopRow === 3 || winMiddleRow === 3) {
-      alert(whichLetter + " wins!");
+      winMessage(whichLetter);
     } else if (winBottomRow === 3 || winFirstCol === 3) {
-      alert(whichLetter + " wins!");
+      winMessage(whichLetter);
     } else if (winSecondCol === 3 || winThirdCol === 3) {
-      alert(whichLetter + " wins!");
+      winMessage(whichLetter);
     } else if (diagonal1 === 3 || diagonal2 === 3) {
-      alert(whichLetter + " wins!");
+      winMessage(whichLetter);
+    } else {
+      switchPlayer();
     }
   }// Closes check4Win function
 });
